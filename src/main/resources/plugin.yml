@@ -1,0 +1,9 @@
+name: EzWorldEdit
+main: ru.s3v3nice.ezworldedit.EzWorldEdit
+version: "1.0"
+api: ["1.0.0"]
+author: S3v3Nice
+permissions:
+  ezworldedit.*:
+    description: Full access.
+    default: op
