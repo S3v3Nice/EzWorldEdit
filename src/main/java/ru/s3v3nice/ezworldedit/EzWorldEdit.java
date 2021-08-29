@@ -35,6 +35,8 @@ public final class EzWorldEdit extends PluginBase {
 
     private void registerCommands() {
         Command[] commands = new Command[]{
+                new Pos1Command(),
+                new Pos2Command(),
                 new WandCommand(),
                 new SetCommand(),
                 new CopyCommand(),
