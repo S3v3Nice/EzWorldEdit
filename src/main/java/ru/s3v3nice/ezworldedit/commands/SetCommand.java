@@ -11,7 +11,6 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.Position;
 import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.Utils;
-import ru.s3v3nice.ezworldedit.data.BlockData;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
 import ru.s3v3nice.ezworldedit.data.UndoData;
@@ -45,7 +44,7 @@ public final class SetCommand extends Command {
         if (!(sender instanceof Player player)) return false;
         if (!testPermission(player)) return false;
         if (args.length < 1) {
-            player.sendMessage("Использование: /we set <id блока> <data блока>");
+            player.sendMessage("Использование: /set <id блока> <data блока>");
             return false;
         }
 
