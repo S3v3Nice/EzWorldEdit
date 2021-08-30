@@ -36,7 +36,7 @@ public class PasteCommand extends Command {
         executor.execute(() -> {
             UndoData undoData = WEUtils.pasteArea(copiedArea, player);
             session.setUndoData(undoData);
-            player.sendMessage(TextFormat.ITALIC + "" + TextFormat.AQUA + "Вставка области прошла успешно!");
+            player.sendMessage(TextFormat.ITALIC + "" + TextFormat.LIGHT_PURPLE + "Вставка области прошла успешно!");
         });
         executor.shutdown();
 

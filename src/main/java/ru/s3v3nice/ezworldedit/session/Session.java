@@ -10,20 +10,20 @@ public final class Session {
     private CuboidArea copiedArea;
     private UndoData undoData;
 
-    public Position getPos1() {
-        return pos1;
-    }
-
     public void setPos1(Position pos1) {
         this.pos1 = pos1;
     }
 
-    public Position getPos2() {
-        return pos2;
-    }
-
     public void setPos2(Position pos2) {
         this.pos2 = pos2;
+    }
+
+    public CuboidArea getSelectedArea() {
+        if (pos1 != null && pos2 != null && pos1.level == pos2.level) {
+            return new CuboidArea(pos1, pos2);
+        } else {
+            return null;
+        }
     }
 
     public CuboidArea getCopiedArea() {

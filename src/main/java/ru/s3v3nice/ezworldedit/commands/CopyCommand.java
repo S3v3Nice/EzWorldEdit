@@ -3,7 +3,6 @@ package ru.s3v3nice.ezworldedit.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.level.Position;
 import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
@@ -21,15 +20,14 @@ public class CopyCommand extends Command {
         if (!testPermission(player)) return false;
 
         Session session = EzWorldEdit.getSession(player);
-        Position pos1 = session.getPos1();
-        Position pos2 = session.getPos2();
+        CuboidArea area = session.getSelectedArea();
 
-        if (pos1 == null || pos2 == null) {
-            player.sendMessage(TextFormat.RED + "Вы не выделили область!");
+        if (area == null) {
+            player.sendMessage(TextFormat.RED + "Вы не выделили область (либо позиции находятся в разных мирах)!");
             return false;
         }
 
-        session.setCopiedArea(new CuboidArea(pos1, pos2));
+        session.setCopiedArea(area);
         player.sendMessage(TextFormat.ITALIC + "" + TextFormat.GOLD + "Область скопирована!");
         return true;
     }
