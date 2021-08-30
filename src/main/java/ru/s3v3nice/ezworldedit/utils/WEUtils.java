@@ -1,10 +1,11 @@
-package ru.s3v3nice.ezworldedit;
+package ru.s3v3nice.ezworldedit.utils;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.nbt.tag.CompoundTag;
+import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.data.BlockData;
 import ru.s3v3nice.ezworldedit.data.BlockEntityData;
 import ru.s3v3nice.ezworldedit.data.UndoData;
@@ -12,7 +13,7 @@ import ru.s3v3nice.ezworldedit.data.UndoData;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Utils {
+public class WEUtils {
     public static void setBlock(Level level, int x, int y, int z, Block block) {
         setBlock(level, x, y, z, BlockData.get(block));
     }

@@ -1,7 +1,7 @@
 package ru.s3v3nice.ezworldedit.data;
 
 import cn.nukkit.level.Position;
-import ru.s3v3nice.ezworldedit.Utils;
+import ru.s3v3nice.ezworldedit.utils.WEUtils;
 
 public class UndoData {
     private final BlockData[] undoArray;
@@ -14,7 +14,7 @@ public class UndoData {
         for (BlockData blockData : undoArray) {
             Position position = blockData.block;
             if (position.level != null) {
-                Utils.setBlock(position.level, (int) position.x, (int) position.y, (int) position.z, blockData);
+                WEUtils.setBlock(position.level, (int) position.x, (int) position.y, (int) position.z, blockData);
             }
         }
     }

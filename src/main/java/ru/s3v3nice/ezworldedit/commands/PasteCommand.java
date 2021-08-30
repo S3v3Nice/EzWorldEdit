@@ -6,9 +6,9 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
-import ru.s3v3nice.ezworldedit.Utils;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
+import ru.s3v3nice.ezworldedit.utils.WEUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,7 +34,7 @@ public class PasteCommand extends Command {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            UndoData undoData = Utils.pasteArea(copiedArea, player);
+            UndoData undoData = WEUtils.pasteArea(copiedArea, player);
             session.setUndoData(undoData);
             player.sendMessage(TextFormat.ITALIC + "" + TextFormat.AQUA + "Вставка области прошла успешно!");
         });

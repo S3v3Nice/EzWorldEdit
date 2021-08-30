@@ -6,14 +6,14 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandEnum;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.item.Item;
 import cn.nukkit.level.Position;
 import cn.nukkit.utils.TextFormat;
-import ru.s3v3nice.ezworldedit.Utils;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
+import ru.s3v3nice.ezworldedit.utils.BlockUtils;
+import ru.s3v3nice.ezworldedit.utils.WEUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +46,7 @@ public final class SetCommand extends Command {
             return false;
         }
 
-        Block block = Item.fromString(args[0]).getBlockUnsafe();
+        Block block = BlockUtils.getBlockFromString(args[0]);
         if (block == null) {
             player.sendMessage(TextFormat.RED + "Неверно введен id блока!");
             return false;
@@ -54,7 +54,7 @@ public final class SetCommand extends Command {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            UndoData undoData = Utils.setArea(new CuboidArea(pos1, pos2), block);
+            UndoData undoData = WEUtils.setArea(new CuboidArea(pos1, pos2), block);
             session.setUndoData(undoData);
             player.sendMessage(TextFormat.ITALIC + "" + TextFormat.LIGHT_PURPLE + "Область успешно заполнилась!");
         });
