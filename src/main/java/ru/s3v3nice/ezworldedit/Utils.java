@@ -60,4 +60,23 @@ public class Utils {
 
         return new UndoData(undoList.toArray(new BlockData[0]));
     }
+
+    public static UndoData replaceInArea(CuboidArea area, Block fromBlock, Block toBlock, boolean ignoreMeta) {
+        Level level = area.level;
+        List<BlockData> undoList = new LinkedList<>();
+
+        for (int x = area.minX; x <= area.maxX; x++) {
+            for (int y = area.minY; y <= area.maxY; y++) {
+                for (int z = area.minZ; z <= area.maxZ; z++) {
+                    Block block = level.getBlock(x, y, z);
+                    if (block.getId() == fromBlock.getId() && (ignoreMeta || block.getDamage() == fromBlock.getDamage())) {
+                        undoList.add(BlockData.get(level.getBlock(x, y, z)));
+                        setBlock(level, x, y, z, toBlock);
+                    }
+                }
+            }
+        }
+
+        return new UndoData(undoList.toArray(new BlockData[0]));
+    }
 }

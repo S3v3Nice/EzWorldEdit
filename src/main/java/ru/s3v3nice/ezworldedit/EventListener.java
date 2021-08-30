@@ -69,6 +69,6 @@ public class EventListener implements Listener {
         if (!player.hasPermission("ezworldedit.*")) return;
 
         Block block = event.getBlock();
-        player.sendTip(TextFormat.YELLOW + "ID: " + TextFormat.AQUA + block.getId() + TextFormat.YELLOW + ", Data: " + TextFormat.AQUA + block.getDamage());
+        player.sendTip(TextFormat.YELLOW + "ID: " + TextFormat.AQUA + block.getId() + TextFormat.YELLOW + ", Meta: " + TextFormat.AQUA + block.getDamage());
     }
 }

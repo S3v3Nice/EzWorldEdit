@@ -39,6 +39,7 @@ public final class EzWorldEdit extends PluginBase {
                 new Pos2Command(),
                 new WandCommand(),
                 new SetCommand(),
+                new ReplaceCommand(),
                 new CopyCommand(),
                 new PasteCommand(),
                 new UndoCommand()
