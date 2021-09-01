@@ -3,8 +3,8 @@ package ru.s3v3nice.ezworldedit.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
+import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class UndoCommand extends Command {
     public UndoCommand() {
-        super("undo", "Отменить последнее действие (EzWorldEdit)");
+        super("undo", Messages.get("undo.description"));
         setPermission("ezworldedit.*");
     }
 
@@ -26,7 +26,7 @@ public class UndoCommand extends Command {
         UndoData undoData = session.getUndoData();
 
         if (undoData == null) {
-            player.sendMessage(TextFormat.RED + "Нет действия, которое можно отменить. ");
+            player.sendMessage(Messages.get("undo.no-action"));
             return false;
         }
 
@@ -34,7 +34,7 @@ public class UndoCommand extends Command {
         executor.execute(() -> {
             undoData.undo();
             session.setUndoData(null);
-            player.sendMessage(TextFormat.GRAY + "Последнее действие было отменено.");
+            player.sendMessage(Messages.get("undo.success"));
         });
         executor.shutdown();
 

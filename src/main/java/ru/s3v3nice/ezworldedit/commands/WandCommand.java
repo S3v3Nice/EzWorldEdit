@@ -6,10 +6,11 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.item.Item;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.utils.TextFormat;
+import ru.s3v3nice.ezworldedit.Messages;
 
 public final class WandCommand extends Command {
     public WandCommand() {
-        super("wand", "Получить топорик для выделения (EzWorldEdit)");
+        super("wand", Messages.get("wand.description"));
         setPermission("ezworldedit.*");
     }
 
@@ -24,8 +25,8 @@ public final class WandCommand extends Command {
 
         Item[] notAdded = ((Player) sender).getInventory().addItem(item);
         switch (notAdded.length) {
-            case 0 -> sender.sendMessage(TextFormat.YELLOW + "" + TextFormat.ITALIC + "Приятного строительства.");
-            case 1 -> sender.sendMessage(TextFormat.GOLD + "" + TextFormat.ITALIC + "В инвентаре не хватает места для нового предмета!");
+            case 0 -> sender.sendMessage(Messages.get("wand.success"));
+            case 1 -> sender.sendMessage(Messages.get("wand.no-space"));
         }
 
         return true;

@@ -1,0 +1,29 @@
+blockid-invalid: "§cInvalid block id!"
+area-not-selected: "§cYou have not selected an area (or the positions are in different worlds)!"
+
+pos:
+  description: "Set the %var position (EzWorldEdit)"
+  set: "§gPosition §b%var §ghas been set (§3%var %var %var§g)"
+wand:
+  description: "Get the wand for selection (EzWorldEdit)"
+  no-space: "§cThere is no space in the inventory for a new item!"
+  success: "§o§eEnjoy the building."
+set:
+  description: "Fill all blocks in area (EzWorldEdit)"
+  usage: "Usage: /set <block id>"
+  success: "§o§bArea has been successfully filled!"
+replace:
+  description: "Replace blocks in the selected area (EzWorldEdit)"
+  usage: "Usage: /replace <block id> <block id>"
+  success: "§o§9Blocks have been successfully replaced!"
+copy:
+  description: "Copy the selected area (EzWorldEdit)"
+  success: "§o§6Area has been successfully copied!"
+paste:
+  description: "Paste the copied area (EzWorldEdit)"
+  area-not-copied: "§cYou haven't copied the area!"
+  success: "§o§dArea has been successfully pasted!"
+undo:
+  description: "Undo the last action (EzWorldEdit)"
+  no-action: "§cThere is no action that can be undone!"
+  success: "§7The last action has been undone."

@@ -6,9 +6,9 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandEnum;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
+import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
 import ru.s3v3nice.ezworldedit.utils.BlockUtils;
@@ -19,12 +19,12 @@ import java.util.concurrent.Executors;
 
 public class ReplaceCommand extends Command {
     public ReplaceCommand() {
-        super("replace", "Заменить блоки в выделенной области (EzWorldEdit)");
+        super("replace", Messages.get("replace.description"));
 
         setPermission("ezworldedit.*");
         addCommandParameters("default", new CommandParameter[]{
-                CommandParameter.newEnum("from-block", CommandEnum.ENUM_BLOCK),
-                CommandParameter.newEnum("to-block", CommandEnum.ENUM_BLOCK)
+                CommandParameter.newEnum("from-id", CommandEnum.ENUM_BLOCK),
+                CommandParameter.newEnum("to-id", CommandEnum.ENUM_BLOCK)
         });
     }
 
@@ -33,7 +33,7 @@ public class ReplaceCommand extends Command {
         if (!(commandSender instanceof Player player)) return false;
         if (!testPermission(player)) return false;
         if (strings.length < 2) {
-            player.sendMessage("Использование: /replace <id блока> <id блока>");
+            player.sendMessage(Messages.get("replace.usage"));
             return false;
         }
 
@@ -41,7 +41,7 @@ public class ReplaceCommand extends Command {
         CuboidArea area = session.getSelectedArea();
 
         if (area == null) {
-            player.sendMessage(TextFormat.RED + "Вы не выделили область (либо позиции находятся в разных мирах)!");
+            player.sendMessage(Messages.get("area-not-selected"));
             return false;
         }
 
@@ -49,7 +49,7 @@ public class ReplaceCommand extends Command {
         Block toBlock = BlockUtils.getBlockFromString(strings[1]);
 
         if (fromBlock == null || toBlock == null) {
-            player.sendMessage(TextFormat.RED + "Неверно введен id блока!");
+            player.sendMessage(Messages.get("blockid-invalid"));
             return false;
         }
 
@@ -60,7 +60,7 @@ public class ReplaceCommand extends Command {
             UndoData undoData = WEUtils.replaceInArea(area, fromBlock, toBlock, ignoreMeta);
             session.setUndoData(undoData);
 
-            player.sendMessage(TextFormat.ITALIC + "" + TextFormat.BLUE + "Блоки в области успешно заменены!");
+            player.sendMessage(Messages.get("replace.success"));
         });
         executor.shutdown();
 

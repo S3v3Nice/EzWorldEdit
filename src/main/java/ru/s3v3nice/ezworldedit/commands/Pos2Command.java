@@ -3,13 +3,13 @@ package ru.s3v3nice.ezworldedit.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
+import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.session.Session;
 
 public class Pos2Command extends Command {
     public Pos2Command() {
-        super("pos2", "Установить 2 позицию (EzWorldEdit)");
+        super("pos2", Messages.get("pos.description", 2));
         setPermission("ezworldedit.*");
     }
 
@@ -21,10 +21,7 @@ public class Pos2Command extends Command {
         Session session = EzWorldEdit.getSession(player);
         session.setPos2(player.getPosition());
 
-        player.sendMessage(TextFormat.MINECOIN_GOLD + "Позиция " + TextFormat.AQUA + 2 +
-                TextFormat.MINECOIN_GOLD + " установлена (" + TextFormat.DARK_AQUA + (int) player.x + " " +
-                (int) player.y + " " + (int) player.z + TextFormat.MINECOIN_GOLD + ")");
-        
+        player.sendMessage(Messages.get("pos.set", 2, (int) player.x, (int) player.y, (int) player.z));
         return true;
     }
 }

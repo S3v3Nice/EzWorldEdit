@@ -3,14 +3,14 @@ package ru.s3v3nice.ezworldedit.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.utils.TextFormat;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
+import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.session.Session;
 
 public class CopyCommand extends Command {
     public CopyCommand() {
-        super("copy", "Скопировать выделенную область (EzWorldEdit)");
+        super("copy", Messages.get("copy.description"));
         setPermission("ezworldedit.*");
     }
 
@@ -23,12 +23,12 @@ public class CopyCommand extends Command {
         CuboidArea area = session.getSelectedArea();
 
         if (area == null) {
-            player.sendMessage(TextFormat.RED + "Вы не выделили область (либо позиции находятся в разных мирах)!");
+            player.sendMessage(Messages.get("area-not-selected"));
             return false;
         }
 
         session.setCopiedArea(area);
-        player.sendMessage(TextFormat.ITALIC + "" + TextFormat.GOLD + "Область скопирована!");
+        player.sendMessage(Messages.get("copy.success"));
         return true;
     }
 }

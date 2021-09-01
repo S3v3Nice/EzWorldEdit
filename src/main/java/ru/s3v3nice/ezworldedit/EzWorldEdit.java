@@ -8,12 +8,18 @@ import ru.s3v3nice.ezworldedit.session.Session;
 import ru.s3v3nice.ezworldedit.session.SessionManager;
 
 public final class EzWorldEdit extends PluginBase {
+    private static EzWorldEdit instance;
     private static boolean isBlockIdShown;
+
+    public static EzWorldEdit getInstance() {
+        return instance;
+    }
 
     @Override
     public void onLoad() {
         saveDefaultConfig();
         isBlockIdShown = getConfig().getBoolean("show-blockid-on-rightclick");
+        instance = this;
     }
 
     @Override

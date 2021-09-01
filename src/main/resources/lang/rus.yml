@@ -1,0 +1,29 @@
+blockid-invalid: "§cНеверно введен id блока!"
+area-not-selected: "§cВы не выделили область (либо позиции находятся в разных мирах)!"
+
+pos:
+  description: "Установить %var позицию (EzWorldEdit)"
+  set: "§gПозиция §b%var §gустановлена (§3%var %var %var§g)"
+wand:
+  description: "Получить топорик для выделения (EzWorldEdit)"
+  no-space: "§cВ инвентаре не хватает места для нового предмета!"
+  success: "§o§eПриятного строительства."
+set:
+  description: "Заполнить выделенную область (EzWorldEdit)"
+  usage: "Использование: /set <id блока>"
+  success: "§o§bОбласть успешно заполнена!"
+replace:
+  description: "Заменить блоки в выделенной области (EzWorldEdit)"
+  usage: "Использование: /replace <id блока> <id блока>"
+  success: "§o§9Блоки в области успешно заменены!"
+copy:
+  description: "Скопировать выделенную область (EzWorldEdit)"
+  success: "§o§gОбласть скопирована!"
+paste:
+  description: "Вставить скопированную область (EzWorldEdit)"
+  area-not-copied: "§cВы не скопировали область!"
+  success: "§o§dВставка области прошла успешно!"
+undo:
+  description: "Отменить последнее действие (EzWorldEdit)"
+  no-action: "§cНет действия, которое можно отменить!"
+  success: "§7Последнее действие было отменено."

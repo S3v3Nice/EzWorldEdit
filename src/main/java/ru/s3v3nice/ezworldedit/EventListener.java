@@ -54,10 +54,8 @@ public class EventListener implements Listener {
             case 1 -> EzWorldEdit.getSession(player).setPos1(block);
             case 2 -> EzWorldEdit.getSession(player).setPos2(block);
         }
-        player.sendMessage(TextFormat.MINECOIN_GOLD + "Позиция " + TextFormat.AQUA + posNum +
-                TextFormat.MINECOIN_GOLD + " установлена (" + TextFormat.DARK_AQUA + (int) block.x + " " +
-                (int) block.y + " " + (int) block.z + TextFormat.MINECOIN_GOLD + ")");
 
+        player.sendMessage(Messages.get("pos.set", posNum, (int) block.x, (int) block.y, (int) block.z));
     }
 
     @EventHandler
@@ -69,6 +67,7 @@ public class EventListener implements Listener {
         if (!player.hasPermission("ezworldedit.*")) return;
 
         Block block = event.getBlock();
-        player.sendTip(TextFormat.YELLOW + "ID: " + TextFormat.AQUA + block.getId() + TextFormat.YELLOW + ", Meta: " + TextFormat.AQUA + block.getDamage());
+        player.sendTip(TextFormat.YELLOW + "ID: " + TextFormat.AQUA + block.getId() +
+                TextFormat.YELLOW + ", Meta: " + TextFormat.AQUA + block.getDamage());
     }
 }
