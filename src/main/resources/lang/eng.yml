@@ -1,4 +1,5 @@
 blockid-invalid: "§cInvalid block id!"
+coordinates-invalid: "§cInvalid coordinates!"
 area-not-selected: "§cYou have not selected an area (or the positions are in different worlds)!"
 
 pos:
