@@ -43,7 +43,7 @@ public class Pos2Command extends Command {
         }
 
         session.setPos2(position);
-        player.sendMessage(Messages.get("pos.set", 2, (int) position.x, (int) position.y, (int) position.z));
+        player.sendMessage(Messages.get("pos.set", 2, position.getFloorX(), position.getFloorY(), position.getFloorZ()));
         return true;
     }
 }

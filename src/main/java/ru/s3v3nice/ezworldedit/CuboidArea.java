@@ -14,11 +14,11 @@ public class CuboidArea {
 
     public CuboidArea(Position pos1, Position pos2) {
         this.level = pos1.level;
-        this.minX = (int) Math.min(pos1.x, pos2.x);
-        this.minY = (int) Math.min(pos1.y, pos2.y);
-        this.minZ = (int) Math.min(pos1.z, pos2.z);
-        this.maxX = (int) Math.max(pos1.x, pos2.x);
-        this.maxY = (int) Math.max(pos1.y, pos2.y);
-        this.maxZ = (int) Math.max(pos1.z, pos2.z);
+        this.minX = Math.min(pos1.getFloorX(), pos2.getFloorX());
+        this.minY = Math.min(pos1.getFloorY(), pos2.getFloorY());
+        this.minZ = Math.min(pos1.getFloorZ(), pos2.getFloorZ());
+        this.maxX = Math.max(pos1.getFloorX(), pos2.getFloorX());
+        this.maxY = Math.max(pos1.getFloorY(), pos2.getFloorY());
+        this.maxZ = Math.max(pos1.getFloorZ(), pos2.getFloorZ());
     }
 }
