@@ -54,7 +54,7 @@ public class WEUtils {
             for (int y = area.minY, pasteY = initialY; y <= area.maxY; y++, pasteY++) {
                 for (int z = area.minZ, pasteZ = initialZ; z <= area.maxZ; z++, pasteZ++) {
                     undoList.add(BlockData.get(level.getBlock(pasteX, pasteY, pasteZ)));
-                    setBlock(level, pasteX, pasteY, pasteZ, level.getBlock(x, y, z));
+                    setBlock(level, pasteX, pasteY, pasteZ, area.level.getBlock(x, y, z));
                 }
             }
         }
