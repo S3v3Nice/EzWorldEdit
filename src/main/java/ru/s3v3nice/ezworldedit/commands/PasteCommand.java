@@ -3,6 +3,8 @@ package ru.s3v3nice.ezworldedit.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.data.CommandEnum;
+import cn.nukkit.command.data.CommandParameter;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
 import ru.s3v3nice.ezworldedit.Messages;
@@ -17,6 +19,9 @@ public class PasteCommand extends Command {
     public PasteCommand() {
         super("paste", Messages.get("paste.description"));
         setPermission("ezworldedit.*");
+        addCommandParameters("default", new CommandParameter[]{
+                CommandParameter.newEnum("replaceOnlyAir", true, CommandEnum.ENUM_BOOLEAN)
+        });
     }
 
     @Override
@@ -32,9 +37,11 @@ public class PasteCommand extends Command {
             return false;
         }
 
+        boolean replaceOnlyAir = strings.length >= 1 && strings[0].toLowerCase().matches("(?i)|on|true|t|1");
+
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            UndoData undoData = WEUtils.pasteArea(copiedArea, player);
+            UndoData undoData = WEUtils.pasteArea(copiedArea, player, replaceOnlyAir);
             session.setUndoData(undoData);
             player.sendMessage(Messages.get("paste.success"));
         });

@@ -1,6 +1,7 @@
 package ru.s3v3nice.ezworldedit.utils;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockAir;
 import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
@@ -43,7 +44,7 @@ public class WEUtils {
         return new UndoData(undoList.toArray(new BlockData[0]));
     }
 
-    public static UndoData pasteArea(CuboidArea area, Position position) {
+    public static UndoData pasteArea(CuboidArea area, Position position, boolean replaceOnlyAir) {
         Level level = position.level;
         int initialX = (int) position.x;
         int initialY = (int) position.y;
@@ -53,8 +54,12 @@ public class WEUtils {
         for (int x = area.minX, pasteX = initialX; x <= area.maxX; x++, pasteX++) {
             for (int y = area.minY, pasteY = initialY; y <= area.maxY; y++, pasteY++) {
                 for (int z = area.minZ, pasteZ = initialZ; z <= area.maxZ; z++, pasteZ++) {
-                    undoList.add(BlockData.get(level.getBlock(pasteX, pasteY, pasteZ)));
-                    setBlock(level, pasteX, pasteY, pasteZ, area.level.getBlock(x, y, z));
+                    Block oldBlock = level.getBlock(pasteX, pasteY, pasteZ);
+                    Block newBlock = area.level.getBlock(x, y, z);
+                    if (replaceOnlyAir && !(oldBlock instanceof BlockAir)) continue;
+
+                    undoList.add(BlockData.get(oldBlock));
+                    setBlock(level, pasteX, pasteY, pasteZ, newBlock);
                 }
             }
         }
