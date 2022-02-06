@@ -9,7 +9,9 @@ import ru.s3v3nice.ezworldedit.session.SessionManager;
 
 public final class EzWorldEdit extends PluginBase {
     private static EzWorldEdit instance;
-    private static boolean isBlockIdShown;
+    private boolean isBlockIdShown;
+    private SessionManager sessionManager;
+    private MessageFormatter messageFormatter;
 
     public static EzWorldEdit getInstance() {
         return instance;
@@ -17,9 +19,11 @@ public final class EzWorldEdit extends PluginBase {
 
     @Override
     public void onLoad() {
+        instance = this;
         saveDefaultConfig();
         isBlockIdShown = getConfig().getBoolean("show-blockid-on-rightclick");
-        instance = this;
+        sessionManager = new SessionManager();
+        messageFormatter = new MessageFormatter();
     }
 
     @Override
@@ -31,7 +35,7 @@ public final class EzWorldEdit extends PluginBase {
 
     private void registerPlayers() {
         for (Player player : getServer().getOnlinePlayers().values()) {
-            SessionManager.add(player);
+            addSession(player);
         }
     }
 
@@ -52,11 +56,23 @@ public final class EzWorldEdit extends PluginBase {
         }
     }
 
-    public static boolean isBlockIdShown() {
+    public boolean isBlockIdShown() {
         return isBlockIdShown;
     }
 
-    public static Session getSession(Player player) {
-        return SessionManager.get(player);
+    public String getMessage(String key, Object... vars) {
+        return messageFormatter.formatMessage(key, vars);
+    }
+
+    public Session getSession(Player player) {
+        return sessionManager.get(player);
+    }
+
+    public void addSession(Player player) {
+        sessionManager.add(player);
+    }
+
+    public void removeSession(Player player) {
+        sessionManager.remove(player);
     }
 }

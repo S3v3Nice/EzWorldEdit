@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
-import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
 
@@ -13,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class UndoCommand extends Command {
     public UndoCommand() {
-        super("undo", Messages.get("undo.description"));
+        super("undo", EzWorldEdit.getInstance().getMessage("undo.description"));
         setPermission("ezworldedit.*");
     }
 
@@ -24,11 +23,11 @@ public class UndoCommand extends Command {
 
         if (!testPermission(player)) return false;
 
-        Session session = EzWorldEdit.getSession(player);
+        Session session = EzWorldEdit.getInstance().getSession(player);
         UndoData undoData = session.getUndoData();
 
         if (undoData == null) {
-            player.sendMessage(Messages.get("undo.no-action"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("undo.no-action"));
             return false;
         }
 
@@ -36,7 +35,7 @@ public class UndoCommand extends Command {
         executor.execute(() -> {
             undoData.undo();
             session.setUndoData(null);
-            player.sendMessage(Messages.get("undo.success"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("undo.success"));
         });
         executor.shutdown();
 

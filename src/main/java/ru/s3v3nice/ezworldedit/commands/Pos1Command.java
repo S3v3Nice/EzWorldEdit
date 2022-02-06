@@ -7,12 +7,11 @@ import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.level.Position;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
-import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.session.Session;
 
 public class Pos1Command extends Command {
     public Pos1Command() {
-        super("pos1", Messages.get("pos.description", 1));
+        super("pos1", EzWorldEdit.getInstance().getMessage("pos.description", 1));
 
         setPermission("ezworldedit.*");
         addCommandParameters("default", new CommandParameter[]{
@@ -27,7 +26,7 @@ public class Pos1Command extends Command {
 
         if (!testPermission(player)) return false;
 
-        Session session = EzWorldEdit.getSession(player);
+        Session session = EzWorldEdit.getInstance().getSession(player);
         Position position;
 
         if (strings.length < 3) {
@@ -39,13 +38,13 @@ public class Pos1Command extends Command {
                 int z = (int) (strings[2].equals("~") ? player.z : Double.parseDouble(strings[2]));
                 position = new Position(x, y, z, player.level);
             } catch (Exception e) {
-                player.sendMessage(Messages.get("coordinates-invalid"));
+                player.sendMessage(EzWorldEdit.getInstance().getMessage("coordinates-invalid"));
                 return false;
             }
         }
 
         session.setPos1(position);
-        player.sendMessage(Messages.get("pos.set", 1, position.getFloorX(), position.getFloorY(), position.getFloorZ()));
+        player.sendMessage(EzWorldEdit.getInstance().getMessage("pos.set", 1, position.getFloorX(), position.getFloorY(), position.getFloorZ()));
         return true;
     }
 }

@@ -10,17 +10,16 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
-import ru.s3v3nice.ezworldedit.session.SessionManager;
 
 public class EventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        SessionManager.add(event.getPlayer());
+        EzWorldEdit.getInstance().addSession(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        SessionManager.remove(event.getPlayer());
+        EzWorldEdit.getInstance().removeSession(event.getPlayer());
     }
 
     @EventHandler
@@ -52,19 +51,20 @@ public class EventListener implements Listener {
 
         switch (posNum) {
             case 1:
-                EzWorldEdit.getSession(player).setPos1(block);
+                EzWorldEdit.getInstance().getSession(player).setPos1(block);
                 break;
             case 2:
-                EzWorldEdit.getSession(player).setPos2(block);
+                EzWorldEdit.getInstance().getSession(player).setPos2(block);
                 break;
         }
 
-        player.sendMessage(Messages.get("pos.set", posNum, (int) block.x, (int) block.y, (int) block.z));
+        String message = EzWorldEdit.getInstance().getMessage("pos.set", posNum, (int) block.x, (int) block.y, (int) block.z);
+        player.sendMessage(message);
     }
 
     @EventHandler
     public void onBlockClick(PlayerInteractEvent event) {
-        if (!EzWorldEdit.isBlockIdShown()) return;
+        if (!EzWorldEdit.getInstance().isBlockIdShown()) return;
         if (event.getAction() != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
 
         Player player = event.getPlayer();

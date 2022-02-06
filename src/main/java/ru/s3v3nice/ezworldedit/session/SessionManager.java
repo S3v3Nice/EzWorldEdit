@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class SessionManager {
-    private final static Map<String, Session> sessions = new HashMap<>();
+    private final Map<String, Session> sessions = new HashMap<>();
 
-    public static void add(Player player) {
+    public void add(Player player) {
         sessions.put(player.getName(), new Session());
     }
 
-    public static void remove(Player player) {
+    public void remove(Player player) {
         sessions.remove(player.getName());
     }
 
-    public static Session get(Player player) {
+    public Session get(Player player) {
         return sessions.get(player.getName());
     }
 }

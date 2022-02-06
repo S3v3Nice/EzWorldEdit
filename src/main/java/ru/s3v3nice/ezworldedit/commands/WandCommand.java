@@ -6,11 +6,11 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.item.Item;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.utils.TextFormat;
-import ru.s3v3nice.ezworldedit.Messages;
+import ru.s3v3nice.ezworldedit.EzWorldEdit;
 
 public final class WandCommand extends Command {
     public WandCommand() {
-        super("wand", Messages.get("wand.description"));
+        super("wand", EzWorldEdit.getInstance().getMessage("wand.description"));
         setPermission("ezworldedit.*");
     }
 
@@ -28,10 +28,10 @@ public final class WandCommand extends Command {
 
         switch (notAdded.length) {
             case 0:
-                commandSender.sendMessage(Messages.get("wand.success"));
+                commandSender.sendMessage(EzWorldEdit.getInstance().getMessage("wand.success"));
                 break;
             case 1:
-                commandSender.sendMessage(Messages.get("wand.no-space"));
+                commandSender.sendMessage(EzWorldEdit.getInstance().getMessage("wand.no-space"));
                 break;
         }
 

@@ -8,7 +8,7 @@ import cn.nukkit.command.data.CommandEnum;
 import cn.nukkit.command.data.CommandParameter;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
-import ru.s3v3nice.ezworldedit.Messages;
+import ru.s3v3nice.ezworldedit.MessageFormatter;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
 import ru.s3v3nice.ezworldedit.utils.BlockUtils;
@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 
 public class ReplaceCommand extends Command {
     public ReplaceCommand() {
-        super("replace", Messages.get("replace.description"));
+        super("replace", EzWorldEdit.getInstance().getMessage("replace.description"));
 
         setPermission("ezworldedit.*");
         addCommandParameters("default", new CommandParameter[]{
@@ -35,15 +35,15 @@ public class ReplaceCommand extends Command {
 
         if (!testPermission(player)) return false;
         if (strings.length < 2) {
-            player.sendMessage(Messages.get("replace.usage"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("replace.usage"));
             return false;
         }
 
-        Session session = EzWorldEdit.getSession(player);
+        Session session = EzWorldEdit.getInstance().getSession(player);
         CuboidArea area = session.getSelectedArea();
 
         if (area == null) {
-            player.sendMessage(Messages.get("area-not-selected"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("area-not-selected"));
             return false;
         }
 
@@ -51,7 +51,7 @@ public class ReplaceCommand extends Command {
         Block toBlock = BlockUtils.getBlockFromString(strings[1]);
 
         if (fromBlock == null || toBlock == null) {
-            player.sendMessage(Messages.get("blockid-invalid"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("blockid-invalid"));
             return false;
         }
 
@@ -62,7 +62,7 @@ public class ReplaceCommand extends Command {
             UndoData undoData = WEUtils.replaceInArea(area, fromBlock, toBlock, ignoreMeta);
             session.setUndoData(undoData);
 
-            player.sendMessage(Messages.get("replace.success"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("replace.success"));
         });
         executor.shutdown();
 

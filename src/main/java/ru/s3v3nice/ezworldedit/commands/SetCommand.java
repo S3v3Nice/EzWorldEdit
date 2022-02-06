@@ -8,7 +8,6 @@ import cn.nukkit.command.data.CommandEnum;
 import cn.nukkit.command.data.CommandParameter;
 import ru.s3v3nice.ezworldedit.CuboidArea;
 import ru.s3v3nice.ezworldedit.EzWorldEdit;
-import ru.s3v3nice.ezworldedit.Messages;
 import ru.s3v3nice.ezworldedit.data.UndoData;
 import ru.s3v3nice.ezworldedit.session.Session;
 import ru.s3v3nice.ezworldedit.utils.BlockUtils;
@@ -19,7 +18,7 @@ import java.util.concurrent.Executors;
 
 public final class SetCommand extends Command {
     public SetCommand() {
-        super("set", Messages.get("set.description"));
+        super("set", EzWorldEdit.getInstance().getMessage("set.description"));
 
         setPermission("ezworldedit.*");
         addCommandParameters("default", new CommandParameter[]{
@@ -34,21 +33,21 @@ public final class SetCommand extends Command {
 
         if (!testPermission(player)) return false;
         if (strings.length < 1) {
-            player.sendMessage(Messages.get("set.usage"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("set.usage"));
             return false;
         }
 
-        Session session = EzWorldEdit.getSession(player);
+        Session session = EzWorldEdit.getInstance().getSession(player);
         CuboidArea area = session.getSelectedArea();
 
         if (area == null) {
-            player.sendMessage(Messages.get("area-not-selected"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("area-not-selected"));
             return false;
         }
 
         Block block = BlockUtils.getBlockFromString(strings[0]);
         if (block == null) {
-            player.sendMessage(Messages.get("blockid-invalid"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("blockid-invalid"));
             return false;
         }
 
@@ -56,7 +55,7 @@ public final class SetCommand extends Command {
         executor.execute(() -> {
             UndoData undoData = WEUtils.setArea(area, block);
             session.setUndoData(undoData);
-            player.sendMessage(Messages.get("set.success"));
+            player.sendMessage(EzWorldEdit.getInstance().getMessage("set.success"));
         });
         executor.shutdown();
 
