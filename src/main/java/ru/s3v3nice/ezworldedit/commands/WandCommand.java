@@ -15,18 +15,24 @@ public final class WandCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String s, String[] args) {
-        if (!(sender instanceof Player player)) return false;
+    public boolean execute(CommandSender commandSender, String s, String[] strings) {
+        if (!(commandSender instanceof Player)) return false;
+        Player player = (Player) commandSender;
+
         if (!testPermission(player)) return false;
 
         Item item = Item.get(Item.GOLD_AXE)
                 .setNamedTag(new CompoundTag().put("EzWorldEdit", new CompoundTag()))
                 .setCustomName(TextFormat.RED + "EzWorldEdit");
+        Item[] notAdded = player.getInventory().addItem(item);
 
-        Item[] notAdded = ((Player) sender).getInventory().addItem(item);
         switch (notAdded.length) {
-            case 0 -> sender.sendMessage(Messages.get("wand.success"));
-            case 1 -> sender.sendMessage(Messages.get("wand.no-space"));
+            case 0:
+                commandSender.sendMessage(Messages.get("wand.success"));
+                break;
+            case 1:
+                commandSender.sendMessage(Messages.get("wand.no-space"));
+                break;
         }
 
         return true;

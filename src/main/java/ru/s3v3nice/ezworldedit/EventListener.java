@@ -51,8 +51,12 @@ public class EventListener implements Listener {
         int posNum = event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK ? 1 : 2;
 
         switch (posNum) {
-            case 1 -> EzWorldEdit.getSession(player).setPos1(block);
-            case 2 -> EzWorldEdit.getSession(player).setPos2(block);
+            case 1:
+                EzWorldEdit.getSession(player).setPos1(block);
+                break;
+            case 2:
+                EzWorldEdit.getSession(player).setPos2(block);
+                break;
         }
 
         player.sendMessage(Messages.get("pos.set", posNum, (int) block.x, (int) block.y, (int) block.z));

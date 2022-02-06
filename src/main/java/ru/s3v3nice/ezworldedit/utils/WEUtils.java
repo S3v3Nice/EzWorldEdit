@@ -22,7 +22,8 @@ public class WEUtils {
     public static void setBlock(Level level, int x, int y, int z, BlockData blockData) {
         level.setBlock(x, y, z, blockData.block, false, false);
 
-        if (blockData instanceof BlockEntityData blockEntityData) {
+        if (blockData instanceof BlockEntityData) {
+            BlockEntityData blockEntityData = (BlockEntityData) blockData;
             CompoundTag nbt = blockEntityData.nbt.putInt("x", x).putInt("y", y).putInt("z", z);
             BlockEntity.createBlockEntity(blockEntityData.blockEntityType, level.getChunk(x >> 4, z >> 4), nbt);
         }

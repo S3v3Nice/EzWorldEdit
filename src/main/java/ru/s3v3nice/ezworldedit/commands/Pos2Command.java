@@ -22,7 +22,9 @@ public class Pos2Command extends Command {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        if (!(commandSender instanceof Player player)) return false;
+        if (!(commandSender instanceof Player)) return false;
+        Player player = (Player) commandSender;
+
         if (!testPermission(player)) return false;
 
         Session session = EzWorldEdit.getSession(player);

@@ -28,10 +28,12 @@ public final class SetCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String s, String[] args) {
-        if (!(sender instanceof Player player)) return false;
+    public boolean execute(CommandSender commandSender, String s, String[] strings) {
+        if (!(commandSender instanceof Player)) return false;
+        Player player = (Player) commandSender;
+
         if (!testPermission(player)) return false;
-        if (args.length < 1) {
+        if (strings.length < 1) {
             player.sendMessage(Messages.get("set.usage"));
             return false;
         }
@@ -44,7 +46,7 @@ public final class SetCommand extends Command {
             return false;
         }
 
-        Block block = BlockUtils.getBlockFromString(args[0]);
+        Block block = BlockUtils.getBlockFromString(strings[0]);
         if (block == null) {
             player.sendMessage(Messages.get("blockid-invalid"));
             return false;
